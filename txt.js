@@ -1,4 +1,4 @@
-export default { isDigit, isNumberWord, ToDigit, extractNumberWord, containsNumberWord }
+export default { isLetter, isDigit, isNumberWord, ToDigit, extractNumberWord, containsNumberWord }
 
 const one = 'one'
 const two = 'two'
@@ -13,6 +13,10 @@ const digits = [one, two, three, four, five, six, seven, eight, nine]
 
 function isDigit(char) {
   return char >= '0' && char <= '9'
+}
+
+function isLetter(char) {
+  return (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')
 }
 
 function isNumberWord(word) {

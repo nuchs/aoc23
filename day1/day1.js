@@ -2,10 +2,10 @@ import file from '../file.js'
 import txt from '../txt.js'
 import log from '../log.js'
 
-export default { part1, part2 }
-
 const part1 = (input) => solve(input, parser1)
 const part2 = (input) => solve(input, parser2)
+
+export default { part1, part2 }
 
 function solve(input, parser) {
   const lines = file.readLines(input)

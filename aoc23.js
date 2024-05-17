@@ -5,6 +5,7 @@ import utils from './utils.js'
 function main(spec) {
   try {
     log.separator()
+    log.info()
     log.info(`  Day ${spec.day}`)
     log.info()
 
