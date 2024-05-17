@@ -4,16 +4,13 @@ import log from '../log.js'
 
 export default { part1, part2 }
 
-function part1(input) {
-  const lines = file.readLines(input)
-  const calibration1 = file.parse(lines, parser1)
-  return reducer(calibration1)
-}
+const part1 = (input) => solve(input, parser1)
+const part2 = (input) => solve(input, parser2)
 
-function part2(input) {
+function solve(input, parser) {
   const lines = file.readLines(input)
-  const calibration2 = file.parse(lines, parser2)
-  return reducer(calibration2)
+  const calibrationValues = file.parse(lines, parser)
+  return reducer(calibrationValues)
 }
 
 function parser1(line) {
@@ -44,6 +41,8 @@ function parser2(line) {
     buf += character
     if (txt.containsNumberWord(buf)) {
       const nw = txt.extractNumberWord(buf)
+      // Since there are no digits in the name of a number we can safely overwrite
+      // the candidate.
       candidate = txt.ToDigit(nw)
     }
 
@@ -56,9 +55,13 @@ function parser2(line) {
         last = candidate
       }
 
-      // a bit cheesey but the max overlap between the names of numbers
-      // is 1 character so we can just keep the last one when the buffer is
-      // reset
+      // In the input data some of the digit names can overlap e.g. oneight
+      // should parse as a one followed by an eight. This means we can't just
+      // toss the buffer after we successfully parse a number.
+      //
+      // It's a bit cheesey but since the max overlap between the names of
+      // numbers is one character, we can just keep the last character when the
+      // buffer is reset and it handles this situation.
       buf = buf[buf.length - 1]
     }
   }
@@ -68,8 +71,9 @@ function parser2(line) {
   return Number(first + last)
 }
 
-function reducer(lines) {
-  return lines.reduce((a, b) => a + b, 0)
+function reducer(values) {
+  // This just sums the values
+  return values.reduce((a, b) => a + b, 0)
 }
 
 
