@@ -15,23 +15,12 @@ const tokenTypes = {
 }
 
 function part1(input) {
-  const lines = file.readLines(input)
-  const records = file.parse(lines, parser)
+  const records = file.parseLines(input, parser)
   return reducer1(records, { MaxRed: 12, MaxBlue: 14, MaxGreen: 13 })
-}
-
-function part2(input) {
-  const lines = file.readLines(input)
-  const records = file.parse(lines, parser)
-  return reducer2(records)
 }
 
 function reducer1(records, limits) {
   return records.filter(r => checkLimits(r, limits)).reduce((a, r) => a + r.Game, 0)
-}
-
-function reducer2(records) {
-  return records.reduce((a, r) => a + (r.MinRed * r.MinBlue * r.MinGreen), 0)
 }
 
 function checkLimits(game, limits) {
@@ -39,6 +28,15 @@ function checkLimits(game, limits) {
     game.MinBlue <= limits.MaxBlue &&
     game.MinGreen <= limits.MaxGreen
   return result
+}
+
+function part2(input) {
+  const records = file.parseLines(input, parser)
+  return reducer2(records)
+}
+
+function reducer2(records) {
+  return records.reduce((a, r) => a + (r.MinRed * r.MinBlue * r.MinGreen), 0)
 }
 
 function parser(line) {

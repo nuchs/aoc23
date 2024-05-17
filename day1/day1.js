@@ -8,8 +8,7 @@ const part2 = (input) => solve(input, parser2)
 export default { part1, part2 }
 
 function solve(input, parser) {
-  const lines = file.readLines(input)
-  const calibrationValues = file.parse(lines, parser)
+  const calibrationValues = file.parseLines(input, parser)
   return reducer(calibrationValues)
 }
 
